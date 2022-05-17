@@ -1,0 +1,11 @@
+services:
+
+  filesystem:
+    class: Symfony\Component\Filesystem\Filesystem
+
+  app.command.link:
+    class: Palmyr\GitHooks\Command\LinkCommand
+    arguments:
+      - '@filesystem'
+      - '%root_dir%'
+    tags: ['command']

@@ -1,0 +1,31 @@
+{
+    "name": "palmyr/git-hooks",
+    "description": "Git hooks using symfony",
+    "type": "library",
+    "license": "GPL-3.0-only",
+    "authors": [
+        { "name": "Ryan Palm", "email":  "rspalm@bigpond.com" }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Palmyr\\GitHooks\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Palmyr\\GitHooks\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "palmyr/commonutils": "^1.0",
+        "palmyr/php-coding-standards": "^1.0",
+        "symfony/console": "^6.0",
+        "symfony/dependency-injection": "^6.0",
+        "symfony/yaml": "^6.0",
+        "symfony/config": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
