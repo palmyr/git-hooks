@@ -1,4 +1,6 @@
 #!/bin/sh
+
+echo "pre-rebase"
 #
 # Copyright (c) 2006, 2008 Junio C Hamano
 #

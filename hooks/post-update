@@ -1,4 +1,6 @@
 #!/bin/sh
+
+echo "post-update"
 #
 # An example hook script to prepare a packed repository for use over
 # dumb transports.
