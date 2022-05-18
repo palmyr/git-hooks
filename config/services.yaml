@@ -9,3 +9,7 @@ services:
       - '@filesystem'
       - '%root_dir%'
     tags: ['command']
+
+  app.command.pre_commit:
+    class: Palmyr\GitHooks\Command\PreCommitHookCommand
+    tags: ['command']
