@@ -4,7 +4,7 @@ ROOT_DIRECTORY=$(git rev-parse --show-toplevel)
 
 echo "pre-commit"
 
-${ROOT_DIRECTORY}/bin/hook git:pre_commit
+${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit
 
 exit 0
 #
