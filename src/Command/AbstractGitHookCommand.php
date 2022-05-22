@@ -33,10 +33,25 @@ abstract class AbstractGitHookCommand extends Command
     {
         parent::initialize($input, $output);
 
+
+    }
+
+    public function run(InputInterface $input, OutputInterface $output): int
+    {
         $this->logger->info(sprintf(
             "Executing hook \"%s\" on branch \"%s\"",
             $input->getArgument("command"),
             $input->getArgument("branch")
         ));
+
+        $result = parent::run($input, $output);
+
+        $this->logger->info(sprintf(
+            "Executed hook \"%s\" on branch \"%s\"",
+            $input->getArgument("command"),
+            $input->getArgument("branch")
+        ));
+
+        return $result;
     }
 }
