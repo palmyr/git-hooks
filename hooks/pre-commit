@@ -1,8 +1,8 @@
 #!/bin/sh
 
-ROOT_DIRECTORY=$(git rev-parse --show-toplevel)
+HOOK_DIRECTORY=$(dirname $(readlink -f $0))
 
-. ${ROOT_DIRECTORY}/hooks/commonutils.sh
+. ${HOOK_DIRECTORY}/commonutils.sh
 
 echo "pre-commit"
 
