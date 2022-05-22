@@ -1,6 +1,12 @@
 #!/bin/sh
 
-echo "prepare-commit-msg"
+HOOK_DIRECTORY=$(dirname $(readlink -f $0))
+
+. ${HOOK_DIRECTORY}/commonutils.sh
+
+${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit ${BRANCH} "prepare-commit-msg"
+
+exit 0
 #
 # An example hook script to prepare the commit log message.
 # Called by "git commit" with the name of the file that has the

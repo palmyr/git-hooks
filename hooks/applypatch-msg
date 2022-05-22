@@ -1,6 +1,13 @@
 #!/bin/sh
 
-echo "applypatch-msg"
+HOOK_DIRECTORY=$(dirname $(readlink -f $0))
+
+. ${HOOK_DIRECTORY}/commonutils.sh
+
+${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit ${BRANCH} "applypatch-msg"
+
+exit 0
+
 #
 # An example hook script to check the commit log message taken by
 # applypatch from an e-mail message.

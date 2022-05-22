@@ -1,10 +1,8 @@
 #!/bin/sh
 
-echo "post-update"
-#
-# An example hook script to prepare a packed repository for use over
-# dumb transports.
-#
-# To enable this hook, rename this file to "post-update".
+HOOK_DIRECTORY=$(dirname $(readlink -f $0))
 
-exec git update-server-info
+. ${HOOK_DIRECTORY}/commonutils.sh
+
+${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit ${BRANCH} "post-update"
+

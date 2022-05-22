@@ -1,6 +1,12 @@
 #!/bin/sh
 
-echo "pre-rebase"
+HOOK_DIRECTORY=$(dirname $(readlink -f $0))
+
+. ${HOOK_DIRECTORY}/commonutils.sh
+
+${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit ${BRANCH} "pre-rebase"
+
+exit 0
 #
 # Copyright (c) 2006, 2008 Junio C Hamano
 #

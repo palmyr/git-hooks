@@ -4,6 +4,4 @@ HOOK_DIRECTORY=$(dirname $(readlink -f $0))
 
 . ${HOOK_DIRECTORY}/commonutils.sh
 
-echo "pre-commit"
-
 ${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit ${BRANCH}

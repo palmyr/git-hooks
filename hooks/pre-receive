@@ -1,7 +1,12 @@
 #!/bin/sh
 
-echo "pre-receive"
+HOOK_DIRECTORY=$(dirname $(readlink -f $0))
 
+. ${HOOK_DIRECTORY}/commonutils.sh
+
+${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit ${BRANCH} "pre-receive"
+
+exit 0
 #
 # An example hook script to make use of push options.
 # The example simply echoes all push options that start with 'echoback='

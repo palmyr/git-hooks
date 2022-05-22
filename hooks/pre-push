@@ -1,6 +1,12 @@
 #!/bin/sh
 
-echo "pre-push"
+HOOK_DIRECTORY=$(dirname $(readlink -f $0))
+
+. ${HOOK_DIRECTORY}/commonutils.sh
+
+${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit ${BRANCH} "pre-push"
+
+exit 0
 
 # An example hook script to verify what is about to be pushed.  Called by "git
 # push" after it has checked the remote status, but before anything has been

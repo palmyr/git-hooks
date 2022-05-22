@@ -1,6 +1,12 @@
 #!/bin/sh
 
-echo "commit-msg"
+HOOK_DIRECTORY=$(dirname $(readlink -f $0))
+
+. ${HOOK_DIRECTORY}/commonutils.sh
+
+${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit ${BRANCH} "commit-msg"
+
+exit 0
 #
 # An example hook script to check the commit log message.
 # Called by "git commit" with one argument, the name of the file
