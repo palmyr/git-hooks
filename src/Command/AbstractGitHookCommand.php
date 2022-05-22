@@ -32,9 +32,11 @@ abstract class AbstractGitHookCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
+        $command = $input->hasArgument("hook") ? $input->getArgument("hook") : $input->getArgument("command");
+
         $this->logger->info(sprintf(
             "Executing hook \"%s\" on branch \"%s\"",
-            $input->getArgument("command"),
+            $command,
             $input->getArgument("branch")
         ));
 
@@ -42,7 +44,7 @@ abstract class AbstractGitHookCommand extends Command
 
         $this->logger->info(sprintf(
             "Executed hook \"%s\" on branch \"%s\"",
-            $input->getArgument("command"),
+            $command,
             $input->getArgument("branch")
         ));
 
