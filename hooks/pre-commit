@@ -2,7 +2,7 @@
 
 ROOT_DIRECTORY=$(git rev-parse --show-toplevel)
 
-. ${ROOT_DIRECTORY}/commonutils.sh
+. ${ROOT_DIRECTORY}/hooks/commonutils.sh
 
 echo "pre-commit"
 
