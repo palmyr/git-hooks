@@ -4,5 +4,5 @@ HOOK_DIRECTORY=$(dirname $(readlink -f $0))
 
 . ${HOOK_DIRECTORY}/commonutils.sh
 
-${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit ${BRANCH} "pre-merge-commit"
+${ROOT_DIRECTORY}/vendor/bin/hook git:default ${BRANCH} "pre-merge-commit"
 

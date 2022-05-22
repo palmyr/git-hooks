@@ -29,22 +29,16 @@ abstract class AbstractGitHookCommand extends Command
         $this->addArgument('branch', InputArgument::REQUIRED, 'The current branch');
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
-        parent::initialize($input, $output);
 
-
-    }
-
-    public function run(InputInterface $input, OutputInterface $output): int
-    {
         $this->logger->info(sprintf(
             "Executing hook \"%s\" on branch \"%s\"",
             $input->getArgument("command"),
             $input->getArgument("branch")
         ));
 
-        $result = parent::run($input, $output);
+        $result = $this->executeHook($input, $output);
 
         $this->logger->info(sprintf(
             "Executed hook \"%s\" on branch \"%s\"",
@@ -54,4 +48,6 @@ abstract class AbstractGitHookCommand extends Command
 
         return $result;
     }
+
+    abstract protected function executeHook(InputInterface $input, OutputInterface $output): int;
 }

@@ -4,7 +4,7 @@ HOOK_DIRECTORY=$(dirname $(readlink -f $0))
 
 . ${HOOK_DIRECTORY}/commonutils.sh
 
-${ROOT_DIRECTORY}/vendor/bin/hook git:pre_commit ${BRANCH} "update-sample"
+${ROOT_DIRECTORY}/vendor/bin/hook git:default ${BRANCH} "update-sample"
 
 exit 0
 #

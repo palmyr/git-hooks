@@ -16,11 +16,9 @@ class PreCommitHookCommand extends AbstractGitHookCommand
         parent::__construct($logger,'pre_commit');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function executeHook(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->info("Testing");
-
-
         return self::SUCCESS;
     }
 }

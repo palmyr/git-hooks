@@ -10,6 +10,12 @@ services:
       - '%root_dir%'
     tags: ['command']
 
+  app.command.default:
+    class: Palmyr\GitHooks\Command\DefaultGItHookCommand
+    arguments:
+      - '@monolog.logger'
+    tags: [ 'command' ]
+
   app.command.pre_commit:
     class: Palmyr\GitHooks\Command\PreCommitHookCommand
     arguments:

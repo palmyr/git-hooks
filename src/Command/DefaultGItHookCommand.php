@@ -21,7 +21,7 @@ class DefaultGItHookCommand extends AbstractGitHookCommand
         $this->addArgument('hook', InputArgument::REQUIRED, 'The name of the hook');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function executeHook(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->info($input->getArgument("branch"));
         return self::SUCCESS;
