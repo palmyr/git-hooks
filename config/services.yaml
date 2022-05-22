@@ -12,4 +12,22 @@ services:
 
   app.command.pre_commit:
     class: Palmyr\GitHooks\Command\PreCommitHookCommand
+    arguments:
+      - '@monolog.logger'
     tags: ['command']
+
+  monolog.formatter.line:
+    class: Monolog\Formatter\LineFormatter
+
+  monolog.handler.console:
+    class: Monolog\Handler\StreamHandler
+    arguments:
+      - 'php://stdout'
+      - 'debug'
+
+  monolog.logger:
+    class: Monolog\Logger
+    arguments:
+      - 'monolog'
+    calls:
+      - pushHandler: ['@monolog.handler.console']
