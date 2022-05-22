@@ -20,6 +20,7 @@ class PreCommitHookCommand extends AbstractGitHookCommand
     {
         $this->logger->info("Testing");
 
+
         return self::SUCCESS;
     }
 }
