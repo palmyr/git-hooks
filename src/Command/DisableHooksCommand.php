@@ -8,7 +8,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 
-class LinkCommand extends Command
+class DisableHooksCommand extends Command
 {
 
     protected Filesystem $filesystem;
@@ -22,28 +22,21 @@ class LinkCommand extends Command
     {
         $this->filesystem = $filesystem;
         $this->rootDir = $rootDir;
-        parent::__construct('app:link');
+        parent::__construct('hooks:disable');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $io = new SymfonyStyle($input, $output);
 
-        $io->title("Preparing the git directory...");
-
-        if ( !$this->filesystem->exists(".git") ) {
-            $io->warning("Could not find .git directory, run this command in the root directory.");
-            return self::INVALID;
-        }
+        $io->title("Disabling hooks...");
 
         if ( $this->filesystem->exists(".git/hooks") ) {
-            $io->comment("Removing existing hooks directory.");
             $this->filesystem->remove(".git/hooks");
+            $io->success("Disabled hooks");
+        } else {
+            $io->warning("No hooks directory found");
         }
-
-        $this->filesystem->symlink($this->rootDir . DIRECTORY_SEPARATOR . "hooks", ".git/hooks");
-        $io->success("Created symbolic link to hooks directory.");
 
         return self::SUCCESS;
     }

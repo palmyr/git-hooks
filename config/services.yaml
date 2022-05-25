@@ -3,12 +3,19 @@ services:
   filesystem:
     class: Symfony\Component\Filesystem\Filesystem
 
-  app.command.link:
-    class: Palmyr\GitHooks\Command\LinkCommand
+  app.command.enable:
+    class: Palmyr\GitHooks\Command\EnableHooksCommand
     arguments:
       - '@filesystem'
       - '%root_dir%'
     tags: ['command']
+
+  app.command.disable:
+    class: Palmyr\GitHooks\Command\DisableHooksCommand
+    arguments:
+      - '@filesystem'
+      - '%root_dir%'
+    tags: [ 'command' ]
 
   app.command.default:
     class: Palmyr\GitHooks\Command\DefaultGItHookCommand
