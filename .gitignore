@@ -2,4 +2,6 @@
 
 vendor
 
-hooks.yaml
+/hooks.yaml
+/hooks.local.yaml
+/var

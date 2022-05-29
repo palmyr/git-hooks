@@ -1,5 +1,9 @@
 services:
 
+  file_locator:
+    public: true
+    class: Symfony\Component\Config\FileLocator
+
   filesystem:
     class: Symfony\Component\Filesystem\Filesystem
 
@@ -7,40 +11,12 @@ services:
     class: Palmyr\GitHooks\Command\EnableHooksCommand
     arguments:
       - '@filesystem'
-      - '%root_dir%'
+      - '%root_directory%'
     tags: ['command']
 
   app.command.disable:
     class: Palmyr\GitHooks\Command\DisableHooksCommand
     arguments:
       - '@filesystem'
-      - '%root_dir%'
+      - '%root_directory%'
     tags: [ 'command' ]
-
-  app.command.default:
-    class: Palmyr\GitHooks\Command\DefaultGItHookCommand
-    arguments:
-      - '@monolog.logger'
-    tags: [ 'command' ]
-
-  app.command.pre_commit:
-    class: Palmyr\GitHooks\Command\PreCommitHookCommand
-    arguments:
-      - '@monolog.logger'
-    tags: ['command']
-
-  monolog.formatter.line:
-    class: Monolog\Formatter\LineFormatter
-
-  monolog.handler.console:
-    class: Monolog\Handler\StreamHandler
-    arguments:
-      - 'php://stdout'
-      - 'debug'
-
-  monolog.logger:
-    class: Monolog\Logger
-    arguments:
-      - 'monolog'
-    calls:
-      - pushHandler: ['@monolog.handler.console']

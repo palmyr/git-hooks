@@ -1,0 +1,29 @@
+services:
+
+  monolog.formatter.line:
+    class: Monolog\Formatter\LineFormatter
+
+  monolog.handler.console:
+    class: Monolog\Handler\StreamHandler
+    arguments:
+      - 'php://stdout'
+      - 'debug'
+
+  monolog.logger:
+    class: Monolog\Logger
+    arguments:
+      - 'monolog'
+    calls:
+      - pushHandler: [ '@monolog.handler.console' ]
+
+  app.command.default:
+    class: Palmyr\GitHooks\Command\DefaultGItHookCommand
+    arguments:
+      - '@monolog.logger'
+    tags: [ 'command' ]
+
+  app.command.pre_commit:
+    class: Palmyr\GitHooks\Command\PreCommitHookCommand
+    arguments:
+      - '@monolog.logger'
+    tags: [ 'command' ]

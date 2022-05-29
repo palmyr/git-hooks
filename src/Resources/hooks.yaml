@@ -1,0 +1,6 @@
+log_file: "./var/log/hook.log"
+
+hooks:
+  pre-commit:
+    "*":
+      - "echo 'hello world'"
