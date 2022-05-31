@@ -16,14 +16,20 @@ services:
     calls:
       - pushHandler: [ '@monolog.handler.console' ]
 
+  hooks.manager.hooks:
+    class: Palmyr\GitHooks\Manager\HookManager
+
+  hooks.service.hook_service:
+    class: Palmyr\GitHooks\Service\HookService
+    arguments:
+      - "@hooks.manager.hooks"
+      - "@shell_command.factory.command"
+      - "@monolog.logger"
+
   app.command.default:
     class: Palmyr\GitHooks\Command\DefaultGItHookCommand
     arguments:
+      - "@hooks.service.hook_service"
       - '@monolog.logger'
     tags: [ 'command' ]
 
-  app.command.pre_commit:
-    class: Palmyr\GitHooks\Command\PreCommitHookCommand
-    arguments:
-      - '@monolog.logger'
-    tags: [ 'command' ]

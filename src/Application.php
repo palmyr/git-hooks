@@ -7,7 +7,6 @@ use Palmyr\GitHooks\DependencyInjection\Extension;
 use Palmyr\GitHooks\Loader\HookYamlLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application AS BaseApplication;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 

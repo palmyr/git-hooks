@@ -2,6 +2,7 @@
 
 namespace Palmyr\GitHooks\Command;
 
+use Palmyr\GitHooks\Service\HookServiceInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,9 +11,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DefaultGItHookCommand extends AbstractGitHookCommand
 {
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(
+        HookServiceInterface $hookService,
+        LoggerInterface $logger
+    )
     {
-        parent::__construct($logger, 'default');
+        parent::__construct($hookService, $logger, 'default');
     }
 
     protected function configure()
@@ -21,9 +25,15 @@ class DefaultGItHookCommand extends AbstractGitHookCommand
         $this->addArgument('hook', InputArgument::REQUIRED, 'The name of the hook');
     }
 
-    protected function executeHook(InputInterface $input, OutputInterface $output): int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->logger->info($input->getArgument("branch"));
-        return self::SUCCESS;
+        if ( $this->hookService->execute($input->getArgument("hook"), $input->getArgument("branch")) ) {
+            $this->logger->info("Hook executed successfully");
+            return self::SUCCESS;
+        } else {
+            $this->logger->error("Hook executed with errors");
+            return self::FAILURE;
+        }
+
     }
 }

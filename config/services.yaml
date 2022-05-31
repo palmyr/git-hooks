@@ -20,3 +20,11 @@ services:
       - '@filesystem'
       - '%root_directory%'
     tags: [ 'command' ]
+
+  shell_command.service.filesystem:
+    class: Palmyr\CommonUtils\FileSystem\FileSystem
+
+  shell_command.factory.command:
+    class: Palmyr\CommonUtils\Shell\Factory\ShellCommandFactory
+    arguments:
+      - "@shell_command.service.filesystem"

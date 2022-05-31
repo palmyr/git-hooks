@@ -18,6 +18,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('log_file')
                     ->end()
                     ->arrayNode('hooks')
+                        ->normalizeKeys(false)
                         ->arrayPrototype()
                             ->arrayPrototype()
                                 ->children()

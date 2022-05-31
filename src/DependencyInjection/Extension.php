@@ -27,6 +27,10 @@ class Extension extends BaseExtension
         if ( array_key_exists("log_file", $config) ) {
             $this->registerLogService($container, $config["log_file"]);
         }
+
+        if ( array_key_exists("hooks", $config) ) {
+            $this->registerHookConfiguration($container, $config["hooks"]);
+        }
     }
 
     public function getAlias(): string
@@ -46,5 +50,14 @@ class Extension extends BaseExtension
         $container->setDefinition("monolog.handler.file", $handlerDefinition);
 
         $monoLoggerDefinition->addMethodCall("pushHandler", [new Reference("monolog.handler.file")]);
+    }
+
+    protected function registerHookConfiguration(ContainerBuilder $container, array $hookConfig): void
+    {
+        $definition = $container->getDefinition("hooks.manager.hooks");
+
+        $definition->setArgument("\$hookConfig", $hookConfig);
+
+
     }
 }

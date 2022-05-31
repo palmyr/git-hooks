@@ -2,6 +2,7 @@
 
 namespace Palmyr\GitHooks\Command;
 
+use Palmyr\GitHooks\Service\HookServiceInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -11,13 +12,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 abstract class AbstractGitHookCommand extends Command
 {
 
+    protected HookServiceInterface $hookService;
+
     protected LoggerInterface $logger;
 
     public function __construct(
+        HookServiceInterface $hookService,
         LoggerInterface $logger,
         string $name
     )
     {
+        $this->hookService = $hookService;
         $this->logger = $logger;
         parent::__construct('git:' . $name);
     }
@@ -28,28 +33,4 @@ abstract class AbstractGitHookCommand extends Command
 
         $this->addArgument('branch', InputArgument::REQUIRED, 'The current branch');
     }
-
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
-
-        $command = $input->hasArgument("hook") ? $input->getArgument("hook") : $input->getArgument("command");
-
-        $this->logger->info(sprintf(
-            "Executing hook \"%s\" on branch \"%s\"",
-            $command,
-            $input->getArgument("branch")
-        ));
-
-        $result = $this->executeHook($input, $output);
-
-        $this->logger->info(sprintf(
-            "Executed hook \"%s\" on branch \"%s\"",
-            $command,
-            $input->getArgument("branch")
-        ));
-
-        return $result;
-    }
-
-    abstract protected function executeHook(InputInterface $input, OutputInterface $output): int;
 }
